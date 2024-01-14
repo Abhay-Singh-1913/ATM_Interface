@@ -31,5 +31,5 @@ This project simulates the functionality of an ATM. It is designed to perform ba
 ## Usage
 
 - Clone the repository.
-- Compile and run the ATM program.
+- Compile and run the ATM_Machine.
 - Follow the on-screen instructions to perform banking operations.
