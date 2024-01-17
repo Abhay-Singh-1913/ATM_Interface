@@ -1,12 +1,10 @@
 package com.internwings.atm.view;
 
 import java.util.Scanner;
-import com.internwings.atm.controller.ATMController;
 import com.internwings.atm.model.UserBankAccount;
 
 public class ATM_Machine {
 
-	static ATMController controller = new ATMController();
 	static Scanner myInput = new Scanner(System.in);
 	static UserBankAccount userAccount = new UserBankAccount();
 
