@@ -11,7 +11,7 @@ public class ATM_Machine {
 	static {
 		System.out.println("///////////////////////////////////////////////////");
 		System.out.println("/////                                         /////");
-		System.out.println("/////-------------WELCOME TO BANK-------------/////");
+		System.out.println("/////------------ WELCOME TO BANK ------------/////");
 		System.out.println("/////                                         /////");
 		System.out.println("///////////////////////////////////////////////////");
 		System.out.println();
@@ -27,7 +27,7 @@ public class ATM_Machine {
 		String holder_name = myInput.nextLine();
 		userAccount.setAcc_holderName(holder_name);
 		System.out.println(" =================================== ");
-		System.out.print("| Enter Account balance : ");
+		System.out.print("| Enter some amount to deposit: ");
 		double balance = myInput.nextDouble();
 		myInput.nextLine();
 		userAccount.setAcc_balance(balance);
@@ -54,7 +54,7 @@ public class ATM_Machine {
 			System.out.println(yellow);
 			System.out.println(" ___________________________________ ");
 			System.out.println("|                                   |");
-			System.out.println("   ====Welcome " + userAccount.getAcc_holderName() + "====");
+			System.out.println(" ==== Welcome " + userAccount.getAcc_holderName() + " to MENU ====");
 			System.out.println("|___________________________________|");
 			System.out.println("|                                   |");
 			System.out.println("|        1. Check Balance           |");
@@ -77,25 +77,56 @@ public class ATM_Machine {
 
 			case 0:
 				myInput.close();
-				Flag = false;
 				System.exit(0);
+				Flag = false;
 				break;
 			case 1:
+				System.out.println(green);
 				System.out.println(" =================================== ");
 				System.out.println("|   Current Balance : " + checkBalance());
 				System.out.println(" =================================== ");
-				System.out.println();
+				System.out.println(reset);
 				break;
 
 			case 2:
-
+				System.out.println(" =================================== ");
+				System.out.print("| Enter some amount to deposit: ");
 				double deposit_amount = myInput.nextDouble();
 				myInput.nextLine();
-				deposit(deposit_amount);
+				System.out.println(" =================================== ");
+				if (deposit(deposit_amount)) {
+					System.out.println(green);
+					System.out.println(" =================================== ");
+					System.out.println("| Your Transaction done Successfully|");
+					System.out.println(" =================================== ");
+					System.out.println(reset);
+				} else {
+					System.out.println(red);
+					System.out.println(" =================================== ");
+					System.out.println("|     Your Transaction Failed       |");
+					System.out.println(" =================================== ");
+					System.out.println(reset);
+				}
+				
 				break;
 
 			case 3:
-
+				System.out.print("| Enter some amount to withdraw: ");
+				double withdraw_amount = myInput.nextDouble();
+				myInput.nextLine();
+				if (withdrawing(withdraw_amount)) {
+					System.out.println(green);
+					System.out.println(" =================================== ");
+					System.out.println("| Your Transaction done Successfully|");
+					System.out.println(" =================================== ");
+					System.out.println(reset);
+				} else {
+					System.out.println(red);
+					System.out.println(" =================================== ");
+					System.out.println("|     Your Transaction Failed       |");
+					System.out.println(" =================================== ");
+					System.out.println(reset);
+				}
 				break;
 
 			default:
@@ -106,23 +137,34 @@ public class ATM_Machine {
 				System.out.println(reset);
 				break;
 			}
+			System.out.println(yellow);
+			System.out.println(" =================================== ");
+			System.out.println("|       Thank you vist again        |");
+			System.out.println(" =================================== ");
+			System.out.println(reset);
 
 		}
 	}
 	
-	public static double deposit(double deposite_balance) {
-		double balance = userAccount.getAcc_balance();
-		double new_balance = balance + deposite_balance;
-		userAccount.setAcc_balance(new_balance);
-		return new_balance;
+	public static boolean deposit(double deposite_balance) {
+		if (deposite_balance != 0) {
+			double balance = userAccount.getAcc_balance();
+			double new_balance = balance + deposite_balance;
+			userAccount.setAcc_balance(new_balance);
+			return true;
+		}
+		return false;
+		
 	}
 	
 	public static boolean withdrawing(double withdraw_balance) {
-		double balance = userAccount.getAcc_balance();
-		if (balance >= withdraw_balance) {
-			double new_balance = balance - withdraw_balance;
-			userAccount.setAcc_balance(new_balance);
-			return true;
+		if (withdraw_balance != 0) {
+			double balance = userAccount.getAcc_balance();
+			if (balance >= withdraw_balance) {
+				double new_balance = balance - withdraw_balance;
+				userAccount.setAcc_balance(new_balance);
+				return true;
+			}
 		}
 		return false;
 	}
